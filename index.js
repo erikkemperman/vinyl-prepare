@@ -26,7 +26,7 @@ function prepareRead(glob, opt) {
     throw new Error('Invalid glob argument: ' + glob);
   }
 
-  var followSymlinks = defaultTo(boolean(opt.followSymlinks), true);
+  var resolveSymlinks = defaultTo(boolean(opt.resolveSymlinks), true);
 
   // A stat property is exposed on file objects as a (wanted) side effect
   function normalize(globFile, enc, callback) {
@@ -40,7 +40,7 @@ function prepareRead(glob, opt) {
 
       globFile.stat = stat;
 
-      if (followSymlinks && stat.isSymbolicLink()) {
+      if (resolveSymlinks && stat.isSymbolicLink()) {
         // Recurse until all symbolic links on the path are resolved
         return fs.realpath(globFile.path, onRealpath);
       }
