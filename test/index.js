@@ -43,23 +43,6 @@ describe('prepare', function() {
 
 describe('.src()', function() {
 
-  it('doesn\'t wrap in vinyl if already a vinyl', function(done) {
-    var file = new File({
-      path: inputPath,
-    });
-
-    function assert(files) {
-      expect(files.length).toEqual(1);
-      expect(files[0]).toBe(file);
-    }
-
-    pipe([
-      from.obj([file]),
-      prepare.src(),
-      concat(assert),
-    ], done);
-  });
-
   it('sets path to originalSymlinkPath, if given', function(done) {
     var file = new File({
       path: inputPath,
